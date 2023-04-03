@@ -9,6 +9,8 @@ import com.alper.CarRentApp.mapper.ICarMapper;
 import com.alper.CarRentApp.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarService extends ServiceManager<Car,Long> {
 
@@ -16,16 +18,16 @@ public class CarService extends ServiceManager<Car,Long> {
 
     private CarColorService carColorService;
 
-    public CarService(ICarRepository repository, CarColorService carColorService){
+    public CarService(ICarRepository repository, CarColorService carColorService) {
         super(repository);
-        this.repository=repository;
-        this.carColorService=carColorService;
+        this.repository = repository;
+        this.carColorService = carColorService;
     }
 
-    public Car save(SaveCarRequestDto dto){
-       Car car = save(ICarMapper.INSTANCE.toCar(dto));
+    public Car save(SaveCarRequestDto dto) {
+        Car car = save(ICarMapper.INSTANCE.toCar(dto));
 
-       Long colorid = dto.getColorids();
+        Long colorid = dto.getColorids();
         CarColor carColor = CarColor.builder()
                 .carid(car.getId())
                 .colorid(colorid)
@@ -39,6 +41,28 @@ public class CarService extends ServiceManager<Car,Long> {
                 .build();
 
 
-       return car;
+        return car;
     }
+
+    public List<Car> findAllByNameStartingWithIgnoreCase(String name) {
+        return repository.findAllByNameStartingWithIgnoreCase(name);
+    }
+
+    public List<Car> findAllByBrandid(Long id) {
+        return repository.findAllByBrandid(id);
+    }
+
+    public List<Car> findAllByColorid(Long colorid) {
+        return repository.findAllByColorid(colorid);
+    }
+
+    public List<Car> findCarsWithColorAndBrand(){
+       return repository.findCarsWithColorAndBrand();
+
+        }
+
+    public List<Car> findAllByDailyPriceLessThanEqual(int dailyPrice){
+        return repository.findAllByDailyPriceLessThanEqual(dailyPrice);
+    }
+
 }

@@ -30,4 +30,24 @@ public class CarController {
     public ResponseEntity<List<Car>> findAll(){
         return ResponseEntity.ok(carService.findAll());
     }
+
+    @GetMapping("/find-by-name")
+    public ResponseEntity<List<Car>> findAllByNameStartingWithIgnoreCase(String name){
+        return ResponseEntity.ok(carService.findAllByNameStartingWithIgnoreCase(name));
+    }
+
+    @GetMapping("/find-by-brand")
+    public ResponseEntity<List<Car>> findAllByBrandid(Long id){
+        return ResponseEntity.ok(carService.findAllByBrandid(id));
+    }
+
+    @GetMapping("/find-color-brand")
+    public ResponseEntity<List<Car>> findCarsWithColorAndBrand(){
+        return ResponseEntity.ok(carService.findCarsWithColorAndBrand());
+    }
+
+    @GetMapping("/find-daily-price")
+    public ResponseEntity<List<Car>> findAllByDailyPriceLessThanEqual(int dailyPrice){
+        return ResponseEntity.ok(carService.findAllByDailyPriceLessThanEqual(dailyPrice));
+    }
 }
