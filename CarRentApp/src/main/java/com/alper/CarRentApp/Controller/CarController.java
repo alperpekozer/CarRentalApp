@@ -37,13 +37,13 @@ public class CarController {
     }
 
     @GetMapping("/find-by-brand")
-    public ResponseEntity<List<Car>> findAllByBrandid(Long id){
-        return ResponseEntity.ok(carService.findAllByBrandid(id));
+    public ResponseEntity<List<Car>> findAllByBrandids(Long id){
+        return ResponseEntity.ok(carService.findAllByBrandids(id));
     }
 
     @GetMapping("/find-color-brand")
-    public ResponseEntity<List<Car>> findCarsWithColorAndBrand(){
-        return ResponseEntity.ok(carService.findCarsWithColorAndBrand());
+    public ResponseEntity<List<Car>> findAllByColoridsAndBrandids(Long colorids,Long brandids){
+        return ResponseEntity.ok(carService.findAllByColoridsAndBrandids(colorids, brandids));
     }
 
     @GetMapping("/find-daily-price")
